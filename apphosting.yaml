@@ -5,3 +5,48 @@ runConfig:
   # Increase this value if you'd like to automatically spin up
   # more instances in response to increased traffic.
   maxInstances: 1
+
+# Environment variables and secrets for Firebase App Hosting (Cloud Run)
+env:
+  - variable: GEMINI_API_KEY
+    # Create this secret in Google Cloud Secret Manager and reference by name.
+    # Example: gcloud secrets create GEMINI_API_KEY --replication-policy="automatic"
+    #          printf "your-key" | gcloud secrets versions add GEMINI_API_KEY --data-file=-
+    secret: GEMINI_API_KEY
+
+  - variable: NEXT_PUBLIC_SUPABASE_URL
+    value: https://afppimlimzftajjfnfpv.supabase.co
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_SUPABASE_ANON_KEY
+    value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcHBpbWxpbXpmdGFqamZuZnB2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyOTYxNzEsImV4cCI6MjA4Nzg3MjE3MX0.YumloMTN1pxIThIsHSfSA9FSjJgO_RXvTDL5mn16Lpo
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: ENABLE_LOCAL_FS_AGENT
+    value: "false"
+    availability:
+      - RUNTIME
+
+  - variable: AUTO_APPROVE_FS_WRITES
+    value: "false"
+    availability:
+      - RUNTIME
+
+  - variable: ENABLE_AUTO_LOCAL_CONTEXT
+    value: "false"
+    availability:
+      - RUNTIME
+
+  - variable: LOCAL_CONTEXT_ROOTS
+    value: /workspace
+    availability:
+      - RUNTIME
+
+  - variable: N8N_TEMPLATE_ROOTS
+    value: /workspace/n8n-workflows,/workspace/awesome-n8n-templates,/workspace/n8n-free-templates
+    availability:
+      - RUNTIME
