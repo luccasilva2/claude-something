@@ -3,15 +3,17 @@
 import { Message } from "@/types"
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Code2, User } from "lucide-react"
+import { Code2, ThumbsDown, ThumbsUp, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface MessageBubbleProps {
   message: Message
   onOpenArtifact?: () => void
+  feedback?: "up" | "down" | null
+  onFeedback?: (value: "up" | "down") => void
 }
 
-export function MessageBubble({ message, onOpenArtifact }: MessageBubbleProps) {
+export function MessageBubble({ message, onOpenArtifact, feedback, onFeedback }: MessageBubbleProps) {
   const isAI = message.role === "assistant"
 
   return (
@@ -24,8 +26,8 @@ export function MessageBubble({ message, onOpenArtifact }: MessageBubbleProps) {
       <Avatar className={cn("h-8 w-8 shrink-0 border", isAI ? "border-primary/20" : "border-accent/20")}>
         {isAI ? (
           <>
-            <AvatarImage src="https://picsum.photos/seed/aether/100/100" />
-            <AvatarFallback className="bg-primary text-primary-foreground text-[10px]">AF</AvatarFallback>
+            <AvatarImage src="https://picsum.photos/seed/chatclaude/100/100" />
+            <AvatarFallback className="bg-primary text-primary-foreground text-[10px]">CC</AvatarFallback>
           </>
         ) : (
           <AvatarFallback className="bg-secondary text-secondary-foreground">
@@ -64,6 +66,29 @@ export function MessageBubble({ message, onOpenArtifact }: MessageBubbleProps) {
             <Code2 className="h-4 w-4 text-primary" />
             <span className="text-xs font-medium">View Artifact: {message.artifact.title}</span>
           </Button>
+        )}
+
+        {isAI && !message.isThinking && onFeedback && (
+          <div className="flex items-center gap-1 mt-1">
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className={cn("h-7 w-7", feedback === "up" ? "bg-muted" : "")}
+              onClick={() => onFeedback("up")}
+            >
+              <ThumbsUp className="h-3.5 w-3.5" />
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className={cn("h-7 w-7", feedback === "down" ? "bg-muted" : "")}
+              onClick={() => onFeedback("down")}
+            >
+              <ThumbsDown className="h-3.5 w-3.5" />
+            </Button>
+          </div>
         )}
       </div>
     </div>

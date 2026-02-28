@@ -1,4 +1,4 @@
-# **App Name**: AetherFlow
+# **App Name**: ChatClaude
 
 ## Core Features:
 

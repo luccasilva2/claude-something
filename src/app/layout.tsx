@@ -1,9 +1,10 @@
 import type {Metadata} from 'next';
 import './globals.css';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'AetherFlow | Advanced AI Collaboration',
-  description: 'Future-ready AI chat experience with AetherFlow.',
+  title: 'ChatClaude | Advanced AI Collaboration',
+  description: 'Future-ready AI chat experience with ChatClaude.',
 };
 
 export default function RootLayout({
@@ -20,6 +21,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased selection:bg-primary/20 selection:text-primary">
         {children}
+        <Toaster />
       </body>
     </html>
   );
