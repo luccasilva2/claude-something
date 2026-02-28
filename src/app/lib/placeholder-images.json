@@ -1,0 +1,10 @@
+{
+  "placeholderImages": [
+    {
+      "id": "claude-avatar",
+      "description": "Abstract AI avatar icon",
+      "imageUrl": "https://picsum.photos/seed/aether/100/100",
+      "imageHint": "AI avatar"
+    }
+  ]
+}
